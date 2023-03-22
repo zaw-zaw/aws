@@ -31,6 +31,7 @@ resource "random_pet" "sg" {}
 resource "aws_instance" "web" {
   ami                    = "ami-051f0947e420652a9"
   instance_type          = "t2.micro"
+  subnet_id = "subnet-0f609bf5c2250218e"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 }
 
