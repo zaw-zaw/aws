@@ -24,10 +24,8 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-southeast-1"
+  region = "us-west-2"
 }
-
-resource "random_pet" "sg" {}
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -49,7 +47,6 @@ resource "aws_instance" "web" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
 }
-
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
 }
