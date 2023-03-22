@@ -24,8 +24,10 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "ap-southeast-1"
 }
+
+resource "random_pet" "sg" {}
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -46,7 +48,26 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
 }
+
+resource "aws_security_group" "web-sg" {
+  name = "${random_pet.sg.id}-sg"
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
 }
