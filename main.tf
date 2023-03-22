@@ -30,7 +30,7 @@ variable "ami" {
     default = "ami-051f0947e420652a9"
 }
 
-variable "instance_type" {
+variable "instance_types" {
     type = string
     default = "t2.micro"
 }
@@ -62,7 +62,7 @@ variable "web01_security_group_id" {
 
 resource "aws_instance" "Bastion" {
   ami           = var.ami
-  instance_type = var.instance_type
+  instance_type = var.instance_types
   key_name = var.key_name
   subnet_id = var.bistion_subnet_id 
   associate_public_ip_address = "true"
