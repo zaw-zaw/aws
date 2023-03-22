@@ -27,10 +27,14 @@ provider "aws" {
   region = "ap-southeast-1"
 }
 
-resource "aws_instance" "Bastion" {
-  ami           = "ami-051f0947e420652a9"
-  instance_type = "t2.micro"
+resource "aws_instance" "web" {
+  ami                    = "ami-051f0947e420652a9"
+  instance_type          = "t2.micro"
   key_name = "SingtelZZL"
   subnet_id = "subnet-0f609bf5c2250218e"
   associate_public_ip_address = "true"
+}
+
+output "web-address" {
+  value = "${aws_instance.web.public_dns}:8080"
 }
