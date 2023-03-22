@@ -30,8 +30,6 @@ provider "aws" {
 resource "aws_instance" "web" {
   ami                    = "ami-051f0947e420652a9"
   instance_type          = "t2.micro"
-  key_name = "SingtelZZL"
-  subnet_id = "subnet-0f609bf5c2250218e"
   associate_public_ip_address = "true"
 }
 
