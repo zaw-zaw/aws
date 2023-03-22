@@ -32,6 +32,9 @@ resource "random_pet" "sg" {}
 resource "aws_instance" "web" {
   ami                    = "ami-051f0947e420652a9"
   instance_type          = "t2.micro"
+  key_name = "SingtelZZL"
+  subnet_id = "subnet-0f609bf5c2250218e"
+  associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 }
 
@@ -55,3 +58,9 @@ resource "aws_security_group" "web-sg" {
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
 }
+
+output "web_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.web.public_ip
+}
+
