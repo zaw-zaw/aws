@@ -296,10 +296,10 @@ resource "aws_route" "DBToBastion" {
   vpc_peering_connection_id = aws_vpc_peering_connection.BastionToDB-Peer.id
 }
 
-resource "aws_route_table_association" "DBPublicSubnet-IGWRoute" {
-  subnet_id = aws_subnet.DB-PubSubnet.id
-  route_table_id = data.aws_route_table.DBZone-RT.id
-}
+#resource "aws_route_table_association" "DBPublicSubnet-IGWRoute" {
+#  subnet_id = aws_subnet.DB-PubSubnet.id
+#  route_table_id = data.aws_route_table.DBZone-RT.id
+#}
 
 resource "aws_route_table" "DBZone-PrivateRoute" {
   vpc_id = aws_vpc.DBZone-VPC.id
