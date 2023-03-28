@@ -45,7 +45,7 @@ resource "aws_internet_gateway" "WebZone-IGW" {
   vpc_id = aws_vpc.WebZone-VPC.id
 
   tags = {
-    Name = "WebZone IGW"
+    Name = "Webzone IGW"
   }
 }
 
