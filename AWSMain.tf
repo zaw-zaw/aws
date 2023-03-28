@@ -325,7 +325,7 @@ data "aws_security_group" "web-sg" {
 
 resource "aws_vpc_security_group_ingress_rule" "WebAllowSSH" {
     security_group_id = data.aws_security_group.web-sg.id
-    cidr_ipv4   = "192.168.10.0/0"
+    cidr_ipv4   = "192.168.10.0/27"
     from_port   = 22
     ip_protocol = "tcp"
     to_port     = 22
