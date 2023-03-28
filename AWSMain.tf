@@ -273,16 +273,16 @@ resource "aws_route" "BastionToDB-RT" {
 }
 
 ###Routing table for NAT Gateway
-data "aws_route_table" "DBZone-RT" {
-    #subnet_id = aws_subnet.DB-PubSubnet.id
-    subnet_id = aws_vpc.DBZone-VPC.id
-}
+#data "aws_route_table" "DBZone-RT" {
+#    #subnet_id = aws_subnet.DB-PubSubnet.id
+#    subnet_id = aws_vpc.DBZone-VPC.id
+#}
 
-resource "aws_route" "DBZone-PublicRoute" {
-  route_table_id            = data.aws_route_table.DBZone-RT.id
-  destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.DBZone-IGW.id
-}
+#resource "aws_route" "DBZone-PublicRoute" {
+#  route_table_id            = data.aws_route_table.DBZone-RT.id
+#  destination_cidr_block    = "0.0.0.0/0"
+#  gateway_id = aws_internet_gateway.DBZone-IGW.id
+#}
 
 resource "aws_route" "DBToWeb-RT" {
     route_table_id = aws_route_table.DBZone-PrivateRoute.id
